@@ -20,6 +20,7 @@ from .primetest import isprime
 from .generate import sieve, primerange, nextprime
 
 small_trailing = [0] * 256
+
 for j in range(1,8):
     small_trailing[1<<j::1<<(j+1)] = [j] * (1<<(7-j))
 
