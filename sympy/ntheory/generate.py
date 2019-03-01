@@ -991,3 +991,38 @@ def compositepi(n):
     if n < 4:
         return 0
     return n - primepi(n) - 1
+
+
+def collatz_sequence(n):
+    """Returns the list of collatz_sequence for ``n``.
+    Collatz conjecture is that take any natural number n.
+    If n is even, divide it by 2 to get n/2,
+    if n is odd multiply it by 3 and add 1 to obtain 3n+1.
+    Repeat the process indefinitely.
+    The conjecture is that no matter what number you start with, you will always eventually reach 1.
+
+    Examples
+    ========
+
+    >>> from sympy.ntheory.bbp_pi_ import collatz_sequence
+    >>> collatz_sequence(40)
+    [40, 20, 10, 5, 16, 8, 4, 2, 1]
+    >>> collatz_sequence(55)
+    [35, 106, 53, 160, 80, 40, 20, 10, 5, 16, 8, 4, 2, 1]
+
+    References
+    ==========
+
+    .. [1] http://mathworld.wolfram.com/CollatzProblem.html
+
+    """
+    if n <= 0:
+        raise ValueError("No sequence for non positive numbers")
+    if n == 1:
+        return [1]
+    s = [n]
+    if n % 2:
+        s += collatz_sequence(3*n+1)
+    else:
+        s += collatz_sequence(n//2)
+    return s
